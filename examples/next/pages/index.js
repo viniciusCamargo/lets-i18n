@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { TranslationProvider, withTranslations } from 'lets-i18n'
 
 const Hello = ({ t }) => <h2>{t('hello')}, {t('world.world.world.world.world.world.world.world.world.world')}!</h2>
 
 const HelloTranslated = withTranslations(Hello)
 
-class App extends Component {
+const getTranslations = (language = 'pt-br') => require(`../locales/${language}.json`)
+
+export default class App extends Component {
+  static getInitialProps ({ query }) {
+    const translations = getTranslations(query.lang)
+
+    return { translations }
+  }
+
   render () {
     return (
-      <TranslationProvider translations={this.state.translations}>
+      <TranslationProvider translations={this.props.translations}>
         <header>
-          <h1>Welcome to React with lets-i18n!</h1>
+          <h1>Welcome to next.js with lets-i18n!</h1>
         </header>
         <main>
           <HelloTranslated />
@@ -19,19 +26,4 @@ class App extends Component {
       </TranslationProvider>
     )
   }
-
-  componentDidMount () {
-    const translations = require('./locales/pt-br.json')
-
-    this.setState({ translations })
-  }
-
-  state = {
-    translations: {}
-  }
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
