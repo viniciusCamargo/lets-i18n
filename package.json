@@ -18,7 +18,10 @@
     "nextjs",
     "react"
   ],
-  "author": "Vinicius Camargo",
+  "author": {
+    "name": "Vinicius Camargo",
+    "email": "cmrg.vinicius@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/viniciusCamargo/lets-i18n/issues"
