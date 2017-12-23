@@ -25,11 +25,11 @@
   },
   "homepage": "https://github.com/viniciusCamargo/lets-i18n#readme",
   "dependencies": {
-    "lodash.get": "4.x"
+    "lodash.get": "4.x",
+    "prop-types": "15.x"
   },
   "peerDependencies": {
-    "react": "16.x",
-    "prop-types": "15.x"
+    "react": "16.x"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
