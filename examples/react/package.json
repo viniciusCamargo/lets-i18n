@@ -1,0 +1,16 @@
+{
+  "name": "lets-i18n-react-example",
+  "version": "1.0.0",
+  "dependencies": {
+    "lets-i18n": "^0.0.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "^1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
