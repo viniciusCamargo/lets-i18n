@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash.get'
+import has from 'lodash.has'
 
 export class TranslationProvider extends Component {
   // set the context name and type
@@ -31,11 +32,13 @@ export const withTranslations = (ToWrap) => {
       language: PropTypes.string
     }
 
-    translate = (translationProp) => get(
-      this.context.translations,
-      translationProp,
-      console.error(`Translation Error: "${translationProp}" does not exist.`)
-    )
+    translate = (translationProp) => {
+      if (has(this.context.translations, translationProp)) {
+        return get(this.context.translations, translationProp)
+      } else {
+        console.error(`Translation Error: "${translationProp}" does not exist.`)
+      }
+    }
 
     render () {
       // the received component with its "t" and "language" prop

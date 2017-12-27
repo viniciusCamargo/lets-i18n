@@ -1,6 +1,6 @@
 {
   "name": "lets-i18n",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "easy i18n for next.js apps",
   "main": "dist/index.js",
   "scripts": {
@@ -29,6 +29,7 @@
   "homepage": "https://github.com/viniciusCamargo/lets-i18n#readme",
   "dependencies": {
     "lodash.get": "4.x",
+    "lodash.has": "4.x",
     "prop-types": "15.x"
   },
   "peerDependencies": {
