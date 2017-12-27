@@ -5,16 +5,20 @@ import get from 'lodash.get'
 export class TranslationProvider extends Component {
   // set the context name and type
   static childContextTypes = {
-    translations: PropTypes.object
+    translations: PropTypes.object,
+    language: PropTypes.string
   }
 
   getChildContext () {
-    // set the name and value of the prop the children will receive
-    return { translations: this.props.translations }
+    // set the name and value of the props the children will receive
+    return {
+      translations: this.props.translations,
+      language: this.props.language
+    }
   }
 
   render () {
-    // return all/any children, each with a "translations" prop
+    // return all/any children, each with a "translations" and "language" prop
     return this.props.children
   }
 }
@@ -22,13 +26,16 @@ export class TranslationProvider extends Component {
 export const withTranslations = (ToWrap) => {
   class Wrapped extends Component {
     // set the the name and type of the context it will receive from parent
-    static contextTypes = { translations: PropTypes.object }
+    static contextTypes = {
+      translations: PropTypes.object,
+      language: PropTypes.string
+    }
 
     translate = (translationProps) => get(this.context.translations, translationProps, null)
 
     render () {
-      // the received component with its "t" prop
-      return <ToWrap t={this.translate} />
+      // the received component with its "t" and "language" prop
+      return <ToWrap t={this.translate} language={this.context.language} />
     }
   }
 
