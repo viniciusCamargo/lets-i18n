@@ -1,6 +1,6 @@
 {
   "name": "lets-i18n",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "easy i18n for next.js apps",
   "main": "dist/index.js",
   "scripts": {
