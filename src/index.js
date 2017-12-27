@@ -31,7 +31,11 @@ export const withTranslations = (ToWrap) => {
       language: PropTypes.string
     }
 
-    translate = (translationProps) => get(this.context.translations, translationProps, null)
+    translate = (translationProp) => get(
+      this.context.translations,
+      translationProp,
+      console.error(`Translation Error: "${translationProp}" does not exist.`)
+    )
 
     render () {
       // the received component with its "t" and "language" prop
