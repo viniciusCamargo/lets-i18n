@@ -49,4 +49,17 @@ export default withTranslations(MyApp)
 }
 ```
 
+## Development
+For debugging purposes, when the `NODE_ENV` is not `production`, a `translations` prop is also available in the components wrapped by `withTranslations` with all the available keys and values:
+
+```js
+const MyApp = (props) => {
+  console.log(props.translations)
+
+  return <p>{props.t('hello.world')} - language: {props.language}</p>
+}
+
+export default withTranslations(MyApp)
+```
+
 ### See more examples for React and next.js at the [`examples`](https://github.com/viniciusCamargo/lets-i18n/tree/master/examples) directory
