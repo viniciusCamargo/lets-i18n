@@ -3,3 +3,4 @@ dist
 examples/**/.next
 examples/**/node_modules
 examples/**/package-lock.json
+.vscode
