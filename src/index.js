@@ -44,8 +44,13 @@ export const withTranslations = (ToWrap) => {
     render() {
       // the received component with its "t" and "language" prop
       return devOrProd(
-        <ToWrap t={this.translate} language={this.context.language} translations={this.context.translations} />,
-        <ToWrap t={this.translate} language={this.context.language} />
+        <ToWrap
+          t={this.translate}
+          language={this.context.language}
+          translations={this.context.translations}
+          {...this.props}
+        />,
+        <ToWrap t={this.translate} language={this.context.language} {...this.props} />
       )
     }
   }
