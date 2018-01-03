@@ -35,8 +35,7 @@ export const withTranslations = (ToWrap) => {
     // set the the name and type of the context it will receive from parent
     static contextTypes = {
       translations: PropTypes.object,
-      language: PropTypes.string,
-      translations: PropTypes.object
+      language: PropTypes.string
     }
 
     translate = (translationProp) => get(this.context.translations, translationProp, errors.notFound(translationProp))
