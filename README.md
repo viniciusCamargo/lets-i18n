@@ -4,7 +4,7 @@
 
 2. Wrap your component tree with the `TranslationProvider` and pass to its `translations` prop the JSON file of translations.
 
-3. In the child component you want to translate, use the HOC `withTranslations`, then a `t` prop will be available so you can access your translation file.
+3. In the child component, you want to translate, use the HOC `withTranslations`, then a `t` prop will be available so you can access your translation file.
 
 4. (Optional) A `language` prop is also available from `withTranslations` as well. In order to use it, pass the desired language to the `TranslationProvider`.
 
@@ -64,7 +64,7 @@ export default withTranslations(MyApp)
 
 ## Errors
 
-1. Translation file not found: in a non-production environemnt it will not raise any error. In `production` it will print an error to the console:
+1. Translation file not found: in a non-production environment it will not raise any errors. In `production` it will print an error to the console:
 
 ```js
 console.error('TRANSLATION_ERROR: Please, provide the files to translate.')
