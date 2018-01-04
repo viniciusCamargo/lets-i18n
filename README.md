@@ -62,4 +62,37 @@ const MyApp = (props) => {
 export default withTranslations(MyApp)
 ```
 
+## Errors
+
+1. Translation file not found: in a non-production environemnt it will not raise any error. In `production` it will print an error to the console:
+
+```js
+console.error('TRANSLATION_ERROR: Please, provide the files to translate.')
+```
+
+2. Translation key not found: it will raise different errors in `production` and other environments:
+
+### Production
+
+The last property of the translation string will be rendered:
+
+```js
+  <div>{t('this.translation.string.does.not.exist')}</div>
+```
+
+Will be rendered as:
+```html
+  <div>exist</div>
+```
+
+### Other environments
+```js
+  <div>{t('this.translation.string.does.not.exist')}</div>
+```
+
+Will be rendered as:
+```html
+  <div>TRANSLATION_ERROR: "this.translation.string.does.not.exist" does not exist.</div>
+```
+
 ### See more examples for React and next.js at the [`examples`](https://github.com/viniciusCamargo/lets-i18n/tree/master/examples) directory

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash.get'
 
-const devOrProd = (other, prod = null) => (process.env.NODE_ENV !== 'production' ? other : prod)
+const devOrProd = (other, prod = null) =>
+  process.env.NODE_ENV !== 'production' ? other : prod
 
 export class TranslationProvider extends Component {
   // set the context name and type
@@ -25,9 +26,20 @@ export class TranslationProvider extends Component {
   }
 }
 
+const returnLastKey = (str) => str.split('.').pop()
+
 const errors = {
-  notFound: (translation) => devOrProd(`TRANSLATION_ERROR: "${translation}" does not exist.`),
-  noFiles: () => console.error('TRANSLATION_ERROR: Please, provide the files to translate.')
+  notFound(translation) {
+    return devOrProd(
+      `TRANSLATION_ERROR: "${translation}" does not exist.`,
+      returnLastKey(translation)
+    )
+  },
+  noFiles() {
+    return console.error(
+      'TRANSLATION_ERROR: Please, provide the files to translate.'
+    )
+  }
 }
 
 export const withTranslations = (ToWrap) => {
@@ -38,7 +50,12 @@ export const withTranslations = (ToWrap) => {
       language: PropTypes.string
     }
 
-    translate = (translationProp) => get(this.context.translations, translationProp, errors.notFound(translationProp))
+    translate = (translationProp) =>
+      get(
+        this.context.translations,
+        translationProp,
+        errors.notFound(translationProp)
+      )
 
     render() {
       // the received component with its "t" and "language" prop
@@ -49,7 +66,11 @@ export const withTranslations = (ToWrap) => {
           translations={this.context.translations}
           {...this.props}
         />,
-        <ToWrap t={this.translate} language={this.context.language} {...this.props} />
+        <ToWrap
+          t={this.translate}
+          language={this.context.language}
+          {...this.props}
+        />
       )
     }
   }
