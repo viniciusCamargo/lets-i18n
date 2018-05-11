@@ -1,3 +1,10 @@
+# lets-i18n :earth_americas:
+
+[![GitHub license](https://img.shields.io/github/license/viniciusCamargo/lets-i18n.svg)](https://github.com/viniciusCamargo/lets-i18n/blob/master/LICENSE)
+[![Dependencies](https://img.shields.io/david/viniciusCamargo/lets-i18n.svg)](https://david-dm.org/viniciusCamargo/lets-i18n)
+
+Easy internationalization for Next.js and React apps
+
 ## How to use
 
 1. `npm install lets-i18n`
