@@ -3,9 +3,11 @@
   "version": "0.2.5",
   "description": "easy i18n for next.js apps",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "unpkg": "dist/index.umd.js",
   "scripts": {
-    "build": "babel src --out-dir dist",
-    "dev": "babel src --watch --out-dir dist",
+    "build": "microbundle --entry src/index.tsx",
+    "dev": "microbundle watch --entry src/index.tsx",
     "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,17 +30,15 @@
   },
   "homepage": "https://github.com/viniciusCamargo/lets-i18n#readme",
   "dependencies": {
-    "lodash.get": "4.x",
-    "prop-types": "15.x"
+    "lodash.get": "4.x"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1"
+    "@types/react": "16.x",
+    "microbundle": "0.11.x",
+    "react": "16.x"
   },
   "engines": {
     "node": "9.2.0",
