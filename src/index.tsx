@@ -1,73 +1,63 @@
-import React, { Component } from "react";
+import React from "react";
 import get from "lodash.get";
 
-function devOrProd(other, prod = null) {
-  return process.env.NODE_ENV !== "production" ? other : prod;
+import EN from "../examples/react/src/locales/en.json";
+
+const TranslationContext = React.createContext({});
+
+export function cheetos() {
+  return "NOPE";
 }
 
-interface ITranslation {
-  translations: any;
+interface IProvider {
   language: string;
+  translations: any;
 }
 
-export class TranslationProvider extends Component<ITranslation> {
-  getChildContext() {
-    // set the name and value of the props the children will receive
-    return {
-      translations: this.props.translations,
-      language: this.props.language
-    };
-  }
+const TranslationProvider = (
+  props: IProvider & { children: React.ReactNode }
+) => (
+  <TranslationContext.Provider
+    value={{
+      translations: props.translations,
+      language: props.language
+    }}>
+    {props.children}
+  </TranslationContext.Provider>
+);
 
-  render() {
-    // return all/any children, each with a "translations" and "language" prop
-    return this.props.children;
-  }
-}
-
-function returnLastKey(str) {
-  return str.split(".").pop();
-}
-
-const errors = {
-  notFound(translation) {
-    return devOrProd(
-      `TRANSLATION_ERROR: "${translation}" does not exist.`,
-      returnLastKey(translation)
-    );
-  },
-  noFiles() {
-    return console.error(
-      "TRANSLATION_ERROR: Please, provide the files to translate."
-    );
-  }
-};
-
-export function withTranslations(ToWrap) {
-  return class extends Component<ITranslation> {
-    translate(translationProp) {
-      return get(
-        this.context.translations,
-        translationProp,
-        errors.notFound(translationProp)
-      );
-    }
-
+const withTranslations = (WrappedComponent) => {
+  return class extends React.Component<any> {
     render() {
-      // the received component with its "t" and "language" prop
-      return devOrProd(
-        <ToWrap
-          t={this.translate}
-          language={this.context.language}
-          translations={this.context.translations}
-          {...this.props}
-        />,
-        <ToWrap
-          t={this.translate}
-          language={this.context.language}
-          {...this.props}
-        />
+      return (
+        <TranslationContext.Consumer>
+          {(context: IProvider) => (
+            <WrappedComponent
+              t={(translationKey) =>
+                get(context.translations, translationKey, "NOPE")
+              }
+              language={context.language}
+              {...this.props}
+            />
+          )}
+        </TranslationContext.Consumer>
       );
     }
   };
-}
+};
+
+const Hello = ({ language, t }) => (
+  <h2>
+    <span>{language}</span>
+    <span>{t("hello")} </span>
+    {t("world.world.world.world.world.world.world.world.world.world")}!
+  </h2>
+);
+
+const HelloTranslated2 = withTranslations(Hello);
+
+export default () => (
+  <TranslationProvider language="en" translations={EN}>
+    <HelloTranslated2 />
+  </TranslationProvider>
+);
